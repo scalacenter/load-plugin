@@ -21,10 +21,10 @@ object ApplySettings {
       Load.transformSettings(buildScope,
                              uri,
                              extractedStructure.rootProject,
-                             buildSettings)
+                             buildBase ++ buildSettings)
     }
     val transformedGlobalSettings =
-      Project.transform(_ => GlobalScope, globalSettings)
+      inScope(Scope(Zero, Zero, Zero, Zero))(globalSettings)
     val transformedProjectSettings = extractedStructure.allProjectRefs.flatMap {
       projectRef =>
         Load.transformSettings(Load.projectScope(projectRef),

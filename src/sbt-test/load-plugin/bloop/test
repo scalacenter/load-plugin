@@ -1,0 +1,4 @@
+> do-apply
+> load-plugin ch.epfl.scala:sbt-bloop:1.0.0-M9 bloop.integrations.sbt.SbtBloop
+> bloopInstall
+
