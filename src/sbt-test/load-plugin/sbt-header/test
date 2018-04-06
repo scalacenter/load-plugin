@@ -1,0 +1,6 @@
+> do-apply
+> load-plugin de.heikoseeberger:sbt-header:5.0.0 de.heikoseeberger.sbtheader.HeaderPlugin
+-> headerCheck
+> headerCreate
+> headerCheck
+
