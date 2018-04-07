@@ -1,0 +1,13 @@
+> do-apply
+
+> load-plugin org.scalameta:sbt-metals:0.1.0-M1 scala.meta.sbt.MetalsPlugin
+> semanticdbEnable
+> compile
+$ exists target/scala-2.12/classes/META-INF/semanticdb/src/main/scala/A.semanticdb
+
+> load-plugin org.scalameta:sbt-metals:0.1.0-M1 scala.meta.sbt.MetalsPlugin
+$ absent .metals/buildinfo/
+> Compile/metalsWriteBuildInfo
+$ exists .metals/buildinfo/metals/compile.properties
+> Test/metalsWriteBuildInfo
+$ exists .metals/buildinfo/metals/test.properties
