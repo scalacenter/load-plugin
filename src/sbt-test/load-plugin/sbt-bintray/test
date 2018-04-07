@@ -1,0 +1,4 @@
+> do-apply
+> load-plugin org.foundweekends:sbt-bintray:0.5.4 bintray.BintrayPlugin
+> bintrayWhoami
+
