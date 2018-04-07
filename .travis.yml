@@ -1,4 +1,9 @@
+sudo: required
+
 language: scala
+
+before_install:
+  - curl https://raw.githubusercontent.com/scala-native/scala-native/v0.3.7/scripts/travis_setup.sh -sSf | bash
 
 script:
   - sbt scripted

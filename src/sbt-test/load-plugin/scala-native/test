@@ -1,0 +1,4 @@
+> do-apply
+> load-plugin org.scala-native:sbt-scala-native:0.3.7 scala.scalanative.sbtplugin.ScalaNativePlugin
+> nativeLink
+> run
