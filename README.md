@@ -17,7 +17,7 @@ object extending `State => State`:
 ```
 $ sbt
 (...)
-sbt:empty> apply -cp (...)/load-plugin_2.12-0.1.0-SNAPSHOT.jar ch.epfl.scala.LoadPlugin
+sbt:empty> apply -cp (...)/load-plugin_2.12-0.1.0.jar ch.epfl.scala.LoadPlugin
 [info] Applying State transformations ch.epfl.scala.LoadPlugin from (...)/load-plugin_2.12-0.1.0-SNAPSHOT.jar
 [success] Injected `load-plugin`
 ```
