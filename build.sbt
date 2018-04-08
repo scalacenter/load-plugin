@@ -20,6 +20,8 @@ val loadPlugin = project
                 "martin.duhem@gmail.com",
                 url(s"https://github.com/Duhemm"))
     ),
+    ghreleaseRepoOrg := "scalacenter",
+    ghreleaseRepoName := "load-plugin",
     scriptedPackageTarget := target.value / s"scripted-${name.value}-${version.value}.jar",
     scriptedDependencies := {
       val bin = (packageBin in Compile).value
