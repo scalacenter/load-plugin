@@ -1,0 +1,5 @@
+> do-apply
+> load-plugin net.virtual-void:sbt-dependency-graph:0.9.0 net.virtualvoid.sbt.graph.DependencyGraphPlugin
+> dependencyDot
+$ must-mirror expected.dot target/dependencies-compile.dot
+

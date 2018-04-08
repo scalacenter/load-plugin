@@ -1,0 +1,18 @@
+digraph "dependency-graph" {
+    graph[rankdir="LR"]
+    edge [
+        arrowtail="none"
+    ]
+    "foobar:foobar_2.12:0.1.0-SNAPSHOT"[label=<foobar<BR/><B>foobar_2.12</B><BR/>0.1.0-SNAPSHOT> style=""]
+    "org.scala-lang:scala-reflect:2.12.4"[label=<org.scala-lang<BR/><B>scala-reflect</B><BR/>2.12.4> style=""]
+    "org.typelevel:cats-core_2.12:1.1.0"[label=<org.typelevel<BR/><B>cats-core_2.12</B><BR/>1.1.0> style=""]
+    "org.typelevel:cats-kernel_2.12:1.1.0"[label=<org.typelevel<BR/><B>cats-kernel_2.12</B><BR/>1.1.0> style=""]
+    "org.typelevel:cats-macros_2.12:1.1.0"[label=<org.typelevel<BR/><B>cats-macros_2.12</B><BR/>1.1.0> style=""]
+    "org.typelevel:machinist_2.12:0.6.2"[label=<org.typelevel<BR/><B>machinist_2.12</B><BR/>0.6.2> style=""]
+    "org.typelevel:machinist_2.12:0.6.2" -> "org.scala-lang:scala-reflect:2.12.4"
+    "foobar:foobar_2.12:0.1.0-SNAPSHOT" -> "org.typelevel:cats-core_2.12:1.1.0"
+    "org.typelevel:cats-core_2.12:1.1.0" -> "org.typelevel:cats-kernel_2.12:1.1.0"
+    "org.typelevel:cats-core_2.12:1.1.0" -> "org.typelevel:cats-macros_2.12:1.1.0"
+    "org.typelevel:cats-core_2.12:1.1.0" -> "org.typelevel:machinist_2.12:0.6.2"
+    "org.typelevel:cats-macros_2.12:1.1.0" -> "org.typelevel:machinist_2.12:0.6.2"
+}
