@@ -1,0 +1,3 @@
+> do-apply
+> if-absent sbtassembly.AssemblyPlugin fail
+> assembly
