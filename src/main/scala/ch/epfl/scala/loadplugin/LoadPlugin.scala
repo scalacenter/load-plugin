@@ -8,10 +8,15 @@ import sbt.internal.inc.classpath.ClasspathUtilities.toLoader
 object LoadPlugin extends (State => State) {
 
   private val LoadPlugin = "load-plugin"
+  private val IfAbsent = "if-absent"
 
   // Parse two strings separated by a space.
   private def moduleParser =
     token(Space) ~> NotSpace ~ (token(Space) ~> NotSpace)
+
+  private def ifAbsentParser =
+    token(Space) ~> NotSpace ~ (token(Space) ~> repsep(StringBasic,
+                                                       token(Space)))
 
   /**
     * An sbt command that resolves a plugin and loads it inside the build.
@@ -54,6 +59,38 @@ object LoadPlugin extends (State => State) {
   }
 
   /**
+    * An sbt command that will run one or more commands if a plugin is not loaded in the build. This
+    * command cannot be used to check whether plugins have been loaded using the `load-plugin`
+    * command.
+    *
+    * This commands takes at least 2 arguments: a fully qualified class name and one or more commands
+    * to execute if the plugin specified is not loaded.
+    */
+  private def ifAbsentCommand: Command = {
+    Command(IfAbsent, Help.empty)(_ => ifAbsentParser) {
+
+      case (state, (fqcn, commands)) =>
+        val extracted = Project.extract(state)
+        val structure = extracted.structure
+        val pluginsClasses = for {
+          (_, unit) <- structure.units
+          plugins = unit.unit.plugins.detected.autoPlugins
+          plugin <- plugins
+        } yield plugin.value.getClass.getName
+
+        state.log.debug("Plugins loaded in the build:")
+        pluginsClasses.foreach(p => state.log.debug(s" - $p"))
+
+        if (pluginsClasses.toList.contains(fqcn + "$")) {
+          state.log.success(s"$fqcn is loaded; skipping.")
+          state
+        } else {
+          commands.toList ::: state
+        }
+    }
+  }
+
+  /**
     * Inject the `load-plugin` command inside the input `State`.
     *
     * This function is meant to be called by sbt when invoking the `apply` command.
@@ -63,7 +100,9 @@ object LoadPlugin extends (State => State) {
     */
   override def apply(state: State): State = {
     val newState =
-      state.copy(definedCommands = state.definedCommands :+ loadPluginCommand)
+      state.copy(
+        definedCommands = state.definedCommands ++ Seq(loadPluginCommand,
+                                                       ifAbsentCommand))
     newState.log.success(s"Injected `$LoadPlugin`")
     newState
   }

@@ -1,0 +1,4 @@
+- Add `if-absent` command. This command tests whether a plugin has been loaded
+  as part of the build (i.e. it **won't see** plugins loaded with
+  `load-plugin`), and executes one or more commands if the plugin is absent.
+  

@@ -1,0 +1,5 @@
+> do-apply
+-> assembly
+> if-absent sbtassembly.AssemblyPlugin "load-plugin com.eed3si9n:sbt-assembly:0.14.6 sbtassembly.AssemblyPlugin"
+> assembly
+
